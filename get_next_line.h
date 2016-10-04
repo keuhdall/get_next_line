@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:38:03 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/03 23:39:06 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/04 04:31:27 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 
 char	*ft_realloc(char *str, int size);
 int		ft_parse_buffer(char **str, char **line);
-int		ft_get_next_line(int const fd, char **line);
+int		get_next_line(int const fd, char **line);
 
 #endif
