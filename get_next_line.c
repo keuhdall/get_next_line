@@ -6,12 +6,11 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/18 00:27:50 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/18 00:31:02 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char		*ft_realloc(char *str, int size)
 {
@@ -55,6 +54,20 @@ char		*ft_set_tmp(char *tmp, char *buffer, int count)
 	return (tmp);
 }
 
+char		*ft_set_line(char *line, char *buffer)
+{
+	if (!line)
+	{
+		line = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
+		if (line)
+			ft_bzero(line, ft_strlen(buffer) + 1);
+	}
+	else
+		line = ft_realloc(line, ft_strlen(buffer));
+	line = ft_strcat(line, buffer);
+	return (line);
+}
+
 int			ft_parse_buffer(char **buffer, char **line, char **tmp)
 {
 	int		count;
@@ -67,8 +80,7 @@ int			ft_parse_buffer(char **buffer, char **line, char **tmp)
 			if (count < ft_strlen(*buffer))
 				*tmp = ft_set_tmp(*tmp, *buffer, count);
 			*buffer = ft_realloc(*buffer, (ft_strlen(*buffer) - count) * -1);
-			*line = ft_realloc(*line, ft_strlen(*buffer));
-			*line = ft_strcat(*line, *buffer);
+			*line = ft_set_line(*line, *buffer);
 			return (1);
 		}
 		count++;
@@ -87,11 +99,10 @@ int			get_next_line(int const fd, char **line)
 	char		*buffer;
 	static char	*tmp = NULL;
 
-	*line = (char *)malloc(sizeof(char) * BUFF_SIZE);
+	*line = NULL;
 	buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
-	if (!line || !buffer)
+	if (!buffer)
 		return (-1);
-	ft_bzero(*line, BUFF_SIZE);
 	while (1)
 	{
 		ret = read(fd, buffer, BUFF_SIZE);
@@ -110,25 +121,3 @@ int			get_next_line(int const fd, char **line)
 	}
 	return (1);
 }
-
-int main(int argc, const char *argv[])
-{
-	int		count;
-	int		fd;
-	int		tmp;
-	char	*line;
-
-	count = 0;
-	fd = open(argv[1], O_RDONLY);
-	tmp = 0;
-	while ((tmp = get_next_line(fd, &line)))
-	{
-		//printf("value : %d\n", tmp);
-		printf("line : %s\n", line);
-		count++;
-	}
-	//printf("value : %d\n", tmp);
-	argc++;
-	return 0;
-}
-
