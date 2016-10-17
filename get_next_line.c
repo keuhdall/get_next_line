@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/18 00:31:02 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/18 01:43:50 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ char		*ft_set_line(char *line, char *buffer)
 	if (!line)
 	{
 		line = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
-		if (line)
-			ft_bzero(line, ft_strlen(buffer) + 1);
+		if (!line)
+			return (NULL);
+		ft_bzero(line, ft_strlen(buffer) + 1);
 	}
 	else
 		line = ft_realloc(line, ft_strlen(buffer));
