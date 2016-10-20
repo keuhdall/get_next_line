@@ -6,13 +6,13 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/18 01:43:50 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/21 00:23:05 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*ft_realloc(char *str, int size)
+char	*ft_realloc(char *str, int size)
 {
 	int		count;
 	char	*newstr;
@@ -33,7 +33,7 @@ char		*ft_realloc(char *str, int size)
 	return (newstr);
 }
 
-char		*ft_set_tmp(char *tmp, char *buffer, int count)
+char	*ft_set_tmp(char *tmp, char *buffer, int count)
 {
 	if (!buffer)
 		return (NULL);
@@ -54,7 +54,7 @@ char		*ft_set_tmp(char *tmp, char *buffer, int count)
 	return (tmp);
 }
 
-char		*ft_set_line(char *line, char *buffer)
+char	*ft_set_line(char *line, char *buffer)
 {
 	if (!line)
 	{
@@ -69,9 +69,9 @@ char		*ft_set_line(char *line, char *buffer)
 	return (line);
 }
 
-int			ft_parse_buffer(char **buffer, char **line, char **tmp)
+int		ft_parse_buffer(char **buffer, char **line, char **tmp)
 {
-	int		count;
+	int	count;
 
 	count = 0;
 	while ((*buffer)[count])
@@ -94,16 +94,16 @@ int			ft_parse_buffer(char **buffer, char **line, char **tmp)
 	return (0);
 }
 
-int			get_next_line(int const fd, char **line)
+int		get_next_line(int const fd, char **line)
 {
 	int			ret;
 	char		*buffer;
 	static char	*tmp = NULL;
 
-	*line = NULL;
 	buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
-	if (!buffer)
+	if (!buffer || fd < 0 || !line)
 		return (-1);
+	*line = NULL;
 	while (1)
 	{
 		ret = read(fd, buffer, BUFF_SIZE);
