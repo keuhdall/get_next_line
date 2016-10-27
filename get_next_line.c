@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/27 17:42:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/27 17:47:46 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,17 +117,4 @@ int		get_next_line(int const fd, char **line)
 			return (0);
 	}
 	return (1);
-}
-
-int main(int argc, const char *argv[])
-{
-	int		fd;
-	char	*line;
-
-	fd = open(argv[1], O_RDONLY);
-	line = NULL;
-	while (get_next_line(fd, &line))
-		ft_putendl(line);
-	argc++;
-	return (0);
 }
