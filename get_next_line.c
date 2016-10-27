@@ -6,32 +6,11 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/26 16:18:38 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/27 17:42:25 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_realloc(char *str, int size)
-{
-	int		count;
-	char	*newstr;
-
-	count = 0;
-	if (!str)
-		return (NULL);
-	newstr = (char *)malloc(sizeof(*newstr) * (ft_strlen(str) + size + 1));
-	if (!newstr)
-		return (NULL);
-	while (count < (ft_strlen(str) + size) && str[count])
-	{
-		newstr[count] = str[count];
-		count++;
-	}
-	newstr[count] = '\0';
-	free(str);
-	return (newstr);
-}
 
 char	*ft_set_tmp(char *tmp, char *buffer, int count)
 {
@@ -50,6 +29,8 @@ char	*ft_set_tmp(char *tmp, char *buffer, int count)
 			(ft_strlen(buffer) - count) + 1);
 		if (tmp)
 			tmp = ft_strcpy(tmp, buffer + count + 1);
+		else
+			tmp = NULL;
 	}
 	return (tmp);
 }
@@ -94,6 +75,21 @@ int		ft_parse_buffer(char **buffer, char **line, char **tmp)
 	return (0);
 }
 
+char	*ft_add_term_char(char *buffer, int ret)
+{
+	if (!buffer)
+		return (NULL);
+	if (ret != BUFF_SIZE && ret != 0 && buffer[ret - 1] != '\n')
+	{
+		buffer = ft_realloc(buffer, 1);
+		buffer[ret] = '\n';
+		buffer[ret + 1] = '\0';
+	}
+	else
+		buffer[ret] = '\0';
+	return (buffer);
+}
+
 int		get_next_line(int const fd, char **line)
 {
 	int			ret;
@@ -109,7 +105,7 @@ int		get_next_line(int const fd, char **line)
 		ret = read(fd, buffer, BUFF_SIZE);
 		if (ret == -1)
 			return (-1);
-		buffer[ret] = '\0';
+		buffer = ft_add_term_char(buffer, ret);
 		if (tmp && ft_strlen(tmp) != 0)
 		{
 			tmp = ft_realloc(tmp, ft_strlen(buffer));
@@ -121,4 +117,17 @@ int		get_next_line(int const fd, char **line)
 			return (0);
 	}
 	return (1);
+}
+
+int main(int argc, const char *argv[])
+{
+	int		fd;
+	char	*line;
+
+	fd = open(argv[1], O_RDONLY);
+	line = NULL;
+	while (get_next_line(fd, &line))
+		ft_putendl(line);
+	argc++;
+	return (0);
 }
