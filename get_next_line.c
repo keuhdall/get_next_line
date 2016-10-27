@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/27 17:47:46 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/28 01:48:44 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,21 @@ int		ft_parse_buffer(char **buffer, char **line, char **tmp)
 	if (*tmp)
 		*tmp = (char *)malloc(sizeof(char) * ft_strlen(*tmp) + BUFF_SIZE + 1);
 	else
-		*tmp = (char *)malloc(sizeof(char) * BUFF_SIZE);
+		*tmp = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
 	*tmp = ft_strcpy(*tmp, *buffer);
 	return (0);
 }
 
-char	*ft_add_term_char(char *buffer, int ret)
+char	*ft_add_term_char(char *buffer, char **tmp, int ret)
 {
 	if (!buffer)
 		return (NULL);
+	if (ret == 0 && ft_strlen(*tmp) == BUFF_SIZE && (*tmp)[BUFF_SIZE - 1] != '\n')
+	{
+		*tmp = ft_realloc(*tmp, 1);
+		(*tmp)[BUFF_SIZE] = '\n';
+		(*tmp)[BUFF_SIZE + 1] = '\0';
+	}
 	if (ret != BUFF_SIZE && ret != 0 && buffer[ret - 1] != '\n')
 	{
 		buffer = ft_realloc(buffer, 1);
@@ -105,7 +111,7 @@ int		get_next_line(int const fd, char **line)
 		ret = read(fd, buffer, BUFF_SIZE);
 		if (ret == -1)
 			return (-1);
-		buffer = ft_add_term_char(buffer, ret);
+		buffer = ft_add_term_char(buffer, &tmp, ret);
 		if (tmp && ft_strlen(tmp) != 0)
 		{
 			tmp = ft_realloc(tmp, ft_strlen(buffer));
