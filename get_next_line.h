@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:38:03 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/18 00:34:12 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/28 02:52:32 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "./libft/libft.h"
 # include <fcntl.h>
 
-char	*ft_realloc(char *str, int size);
 int		ft_parse_buffer(char **str, char **line, char **tmp);
 char	*ft_set_tmp(char *tmp, char *buffer, int count);
 char	*ft_set_line(char *line, char *buffer);

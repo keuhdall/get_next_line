@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/28 01:48:44 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/28 02:52:25 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	*ft_add_term_char(char *buffer, char **tmp, int ret)
 {
 	if (!buffer)
 		return (NULL);
-	if (ret == 0 && ft_strlen(*tmp) == BUFF_SIZE && (*tmp)[BUFF_SIZE - 1] != '\n')
+	if (ret == 0 && ft_strlen(*tmp) == BUFF_SIZE &&
+		(*tmp)[BUFF_SIZE - 1] != '\n')
 	{
 		*tmp = ft_realloc(*tmp, 1);
 		(*tmp)[BUFF_SIZE] = '\n';
