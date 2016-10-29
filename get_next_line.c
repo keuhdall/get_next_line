@@ -6,11 +6,32 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/28 02:52:25 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/29 17:07:00 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_realloc(char *str, int size)
+{
+	int		count;
+	char	*newstr;
+
+	count = 0;
+	if (!str)
+		return (NULL);
+	newstr = (char *)malloc(sizeof(char) * (ft_strlen(str) + size + 1));
+	if (!newstr)
+		return (NULL);
+	while (count < (ft_strlen(str) + size) && str[count])
+	{
+		newstr[count] = str[count];
+		count++;
+	}
+	newstr[count] = '\0';
+	free(str);
+	return (newstr);
+}
 
 char	*ft_set_tmp(char *tmp, char *buffer, int count)
 {
@@ -52,7 +73,7 @@ char	*ft_set_line(char *line, char *buffer)
 
 int		ft_parse_buffer(char **buffer, char **line, char **tmp)
 {
-	int	count;
+	size_t	count;
 
 	count = 0;
 	while ((*buffer)[count])
@@ -125,3 +146,17 @@ int		get_next_line(int const fd, char **line)
 	}
 	return (1);
 }
+/*
+int main(int argc, const char *argv[])
+{
+	int		fd;
+	char	*line;
+
+	fd = open(argv[1], O_RDONLY);
+	line = NULL;
+	while (get_next_line(fd, &line))
+		ft_putendl(line);
+	argc++;
+	return (0);
+}
+*/
