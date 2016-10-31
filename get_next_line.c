@@ -6,32 +6,11 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/29 17:07:00 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/31 02:02:00 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_realloc(char *str, int size)
-{
-	int		count;
-	char	*newstr;
-
-	count = 0;
-	if (!str)
-		return (NULL);
-	newstr = (char *)malloc(sizeof(char) * (ft_strlen(str) + size + 1));
-	if (!newstr)
-		return (NULL);
-	while (count < (ft_strlen(str) + size) && str[count])
-	{
-		newstr[count] = str[count];
-		count++;
-	}
-	newstr[count] = '\0';
-	free(str);
-	return (newstr);
-}
 
 char	*ft_set_tmp(char *tmp, char *buffer, int count)
 {
@@ -98,14 +77,17 @@ int		ft_parse_buffer(char **buffer, char **line, char **tmp)
 
 char	*ft_add_term_char(char *buffer, char **tmp, int ret)
 {
+	size_t	len;
+
 	if (!buffer)
 		return (NULL);
-	if (ret == 0 && ft_strlen(*tmp) == BUFF_SIZE &&
+	if (ret == 0 && *tmp && ft_strlen(*tmp) == BUFF_SIZE &&
 		(*tmp)[BUFF_SIZE - 1] != '\n')
 	{
+		len = ft_strlen(*tmp);
 		*tmp = ft_realloc(*tmp, 1);
-		(*tmp)[BUFF_SIZE] = '\n';
-		(*tmp)[BUFF_SIZE + 1] = '\0';
+		(*tmp)[len] = '\n';
+		(*tmp)[len + 1] = '\0';
 	}
 	if (ret != BUFF_SIZE && ret != 0 && buffer[ret - 1] != '\n')
 	{
@@ -146,17 +128,3 @@ int		get_next_line(int const fd, char **line)
 	}
 	return (1);
 }
-/*
-int main(int argc, const char *argv[])
-{
-	int		fd;
-	char	*line;
-
-	fd = open(argv[1], O_RDONLY);
-	line = NULL;
-	while (get_next_line(fd, &line))
-		ft_putendl(line);
-	argc++;
-	return (0);
-}
-*/
