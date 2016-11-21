@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 05:11:34 by lmarques          #+#    #+#             */
-/*   Updated: 2016/09/09 04:13:29 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/11/03 11:27:14 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	*ft_strstr(const char *big, const char *little)
 	int	count2;
 
 	count = 0;
-	if (big[count] == '\0')
-		return ((char *)&big[count]);
-	if (!little)
+	if (ft_strlen(little) == 0)
 		return ((char *)big);
 	while (big[count])
 	{

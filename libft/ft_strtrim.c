@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/27 20:16:42 by lmarques          #+#    #+#             */
-/*   Updated: 2016/09/20 14:47:12 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/11/04 10:35:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ static	int	ft_nchar(const char *s)
 static	int	ft_rnchar(const char *s)
 {
 	int	count;
+	int	count_whitespaces;
 
 	count = ft_strlen(s) - 1;
+	count_whitespaces = 0;
 	while (s[count] && (s[count] == ' ' ||
 			s[count] == '\n' || s[count] == '\t'))
+	{
 		count--;
-	return (count + 1);
+		count_whitespaces++;
+	}
+	return (count_whitespaces);
 }
 
 char		*ft_strtrim(char const *s)
@@ -46,10 +51,11 @@ char		*ft_strtrim(char const *s)
 	count_s = ft_nchar(s);
 	count_str = 0;
 	str = NULL;
-	str = (char *)malloc(sizeof(char) * (ft_rnchar(s) + ft_nchar(s)) + 1);
+	str = ft_strnew((int)ft_strlen(s) == ft_nchar(s) ? 1 : (int)ft_strlen(s) -
+			ft_nchar(s) - ft_rnchar(s) + 1);
 	if (str)
 	{
-		while (count_s < (ft_rnchar(s)))
+		while (count_s < ((int)ft_strlen(s) - ft_rnchar(s)))
 		{
 			str[count_str] = s[count_s];
 			count_s++;

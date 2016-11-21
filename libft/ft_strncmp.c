@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/05 05:04:27 by lmarques          #+#    #+#             */
-/*   Updated: 2016/09/03 21:22:44 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/08 18:35:12 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		count++;
 	if (count == n)
 		return (0);
-	return (s1[count] - s2[count]);
+	return ((unsigned char)s1[count] - s2[count]);
 }

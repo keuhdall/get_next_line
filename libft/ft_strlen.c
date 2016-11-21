@@ -6,13 +6,15 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/04 05:14:23 by lmarques          #+#    #+#             */
-/*   Updated: 2016/08/24 05:26:21 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/10/28 19:13:52 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *s)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
-	int	count;
+	size_t	count;
 
 	count = 0;
 	while (s[count])

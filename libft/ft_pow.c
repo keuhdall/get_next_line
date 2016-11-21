@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/05 05:01:21 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/09 02:51:13 by lmarques         ###   ########.fr       */
+/*   Created: 2016/11/03 17:47:35 by lmarques          #+#    #+#             */
+/*   Updated: 2016/11/05 11:05:50 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_pow(int nb, int power)
 {
-	int	count;
+	int			count;
+	long int	result;
 
 	count = 0;
-	while (s1[count] && s2[count] && s1[count] == s2[count])
+	result = 1;
+	if (power < 0)
+		return (0);
+	if (power == 0)
+		return (1);
+	while (count < power)
+	{
+		result *= nb;
 		count++;
-	return ((unsigned char)s1[count] - (unsigned char)s2[count]);
+	}
+	return (result);
 }

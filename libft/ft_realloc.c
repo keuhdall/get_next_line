@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:36:30 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/27 17:41:23 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/11/02 18:06:49 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_realloc(char *str, int size)
 {
-	int		count;
+	size_t	count;
 	char	*newstr;
 
 	count = 0;

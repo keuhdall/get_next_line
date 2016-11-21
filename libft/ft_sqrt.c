@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmarques <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/05 05:01:21 by lmarques          #+#    #+#             */
-/*   Updated: 2016/10/09 02:51:13 by lmarques         ###   ########.fr       */
+/*   Created: 2016/11/03 17:39:03 by lmarques          #+#    #+#             */
+/*   Updated: 2016/11/03 17:43:47 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_sqrt(int nb)
 {
-	int	count;
+	long int	long_nb;
+	int			count;
 
-	count = 0;
-	while (s1[count] && s2[count] && s1[count] == s2[count])
+	long_nb = nb;
+	count = 1;
+	while (count * count <= long_nb)
 		count++;
-	return ((unsigned char)s1[count] - (unsigned char)s2[count]);
+	count--;
+	if ((count * count) != long_nb)
+		return (0);
+	return (count);
 }
