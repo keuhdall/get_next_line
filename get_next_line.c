@@ -6,7 +6,7 @@
 /*   By: lmarques <lmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 23:22:24 by lmarques          #+#    #+#             */
-/*   Updated: 2016/11/21 15:03:21 by lmarques         ###   ########.fr       */
+/*   Updated: 2016/11/21 15:41:39 by lmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int		get_next_line(int const fd, char **line)
 {
 	static t_data	*tmp = NULL;
 	t_data			*current;
+	char			test;
 
-	if (!line || fd < 0)
+	if (!line || fd < 0 || read(fd, &test, 0) != 0)
 		return (-1);
 	if (*line)
 		*line = NULL;
